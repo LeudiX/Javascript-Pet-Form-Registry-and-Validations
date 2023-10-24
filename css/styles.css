@@ -1,0 +1,92 @@
+/**
+*! Modal Animation entry
+*/
+.animatetop {
+  animation-name: animate;
+  animation-duration: 0.4s;
+}
+
+/**
+*! Add Animation 
+*/
+@keyframes animate {
+  from {
+    top: -300px;
+    opacity: 0
+  }
+
+  to {
+    top: 0;
+    opacity: 1
+  }
+}
+
+/**
+* ! Style rules for form labels
+*/
+label {
+  display: block;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+/**
+* ! Style rules for form input
+*/
+form div input,
+.form-select {
+  width: 95%;
+  height: 40px;
+  border-radius: 8px;
+  outline: none;
+  border: 2px solid #c4c4c4;
+  padding: 0 35px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+/**
+* ! Style rules for form checkbox inputs 
+*/
+input[type="checkbox"]{
+  padding: 0;
+}
+
+/**
+* ! Style rules for form icons
+*/
+form div i {
+  position: absolute;
+  padding: 12px;
+}
+
+/**
+* ! Style rules for error classes along with success and failure icons
+*/
+.failure-icon,
+.failure-icon2,
+.error,
+.error2 {
+  color: red;
+}
+
+.success-icon,
+.success-icon2 {
+  color: green;
+}
+
+.error,
+.error2,
+.error3 {
+  font-size: 14.5px;
+  margin-top: 5px;
+}
+
+/*Hidding success and failure icons by default*/
+.success-icon,
+.success-icon2,
+.success-icon3,
+.failure-icon,
+.failure-icon2,
+.failure-icon3 {
+  right: 0;
+  opacity: 0;
+}

@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Javascript Form Validation Demo</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!--Adding Custom Styles-->
+    <link rel="stylesheet" href="./css/styles.css">
+    <!--Adding Font Awesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        crossorigin="anonymous" />
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+
+    <div class="container-fluid p-3 bg-primary text-white text-center">
+        <h1>Lost Pets Registry</h1>
+        <h6>Validando formularios del lado del cliente con JS</h6>
+        <img src="./img/doggie-removebg-2-preview.png" class="img-fluid mx-auto d-block" alt="Guardian Dog"
+            style="max-width: 150px;">
+    </div>
+
+    <!-- Row with the buttons to open Modals -->
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-sm-4 mb-3">
+                <h3 class="text-center">Sign In</h3>
+                <br>
+                <div class="d-grid">
+                    <button id="b1" type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
+                        data-bs-target="#signInModal">Sign In</button>
+                </div>
+            </div>
+            <div class="col-sm-4 mb-3">
+                <h3 class="text-center">Sign Up</h3>
+                <br>
+                <div class="d-grid">
+                    <button id="b2" type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
+                        data-bs-target="#signUpModal">Sign Up</button>
+                </div>
+            </div>
+            <div class="col-sm-4 -mb-3">
+                <h3 class="text-center">Register Your Pet</h3>
+                <br>
+                <div class="d-grid">
+                    <button id="b3" type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
+                        data-bs-target="#dataEntryModal">Register now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- The Sign In Form Modal -->
+    <form class="modal" id="signInModal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title w-100 text-center">Sign In</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <!-- Email input -->
+                    <div>
+                        <label for="email">Email</label>
+                        <i class="far fa-envelope"></i>
+
+                        <input type="email" name="email" id="email" placeholder="abc@gmail.com" />
+
+                        <i class="fas fa-exclamation-circle failure-icon"></i>
+                        <i class="far fa-check-circle success-icon"></i>
+
+                        <div class="error"></div>
+
+                    </div>
+                    <!--   Password input -->
+                    <div>
+                        <label for="password">Password</label>
+                        <i class="fas fa-lock"></i>
+
+                        <input type="password" name="password" id="password" placeholder="Password here" />
+
+                        <i class="fas fa-exclamation-circle failure-icon"></i>
+                        <i class="far fa-check-circle success-icon"></i>
+
+                        <div class="error"></div>
+
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <div class=" w-100 d-grid">
+                        <button id="modal1Btn" type="submit" class="btn btn-outline-danger">Submit</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+    <!-- The Sign Up Form Modal -->
+    <form class="modal" id="signUpModal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title w-100 text-center">Sign Up</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <!-- User Name input -->
+                    <div>
+                        <label for="username">User Name</label>
+                        <i class="fas fa-user"></i>
+
+                        <input type="text" name="username" id="username" placeholder="Joy Shaheb" />
+
+                        <i class="fas fa-exclamation-circle failure-icon2"></i>
+                        <i class="far fa-check-circle success-icon2"></i>
+
+                        <div class="error2"></div>
+
+                    </div>
+                    <!-- Email input -->
+                    <div>
+                        <label for="email2">Email</label>
+                        <i class="far fa-envelope"></i>
+
+                        <input type="email" name="email" id="email2" placeholder="abc@gmail.com" />
+
+                        <i class="fas fa-exclamation-circle failure-icon2"></i>
+                        <i class="far fa-check-circle success-icon2"></i>
+
+                        <div class="error2"></div>
+
+                    </div>
+                    <!--   Password input -->
+                    <div>
+                        <label for="password2">Password</label>
+                        <i class="fas fa-lock"></i>
+
+                        <input type="password" name="password" id="password2" placeholder="Password here" />
+
+                        <i class="fas fa-exclamation-circle failure-icon2"></i>
+                        <i class="far fa-check-circle success-icon2"></i>
+
+                        <div class="error2"></div>
+
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <div class=" w-100 d-grid">
+                        <button id="modal2Btn" type="submit" class="btn btn-outline-danger">Submit</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+    <!-- The Missed Pet Data Entry Form Modal -->
+    <form class="modal" id="dataEntryModal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title w-100 text-center">Missed Pet</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <!-- Pet Name input -->
+                    <div>
+                        <label for="petname">Pet Name</label>
+                        <i class="fas fa-dog"></i>
+
+                        <input type="text" name="petname" id="petname" placeholder="Rocky Loo" />
+
+                        <i class="fas fa-exclamation-circle failure-icon3"></i>
+                        <i class="far fa-check-circle success-icon3"></i>
+
+                        <div class="error3"></div>
+
+                    </div>
+                    <!-- Type of Pet input -->
+                    <div>
+                        <label for="pettype">Type of Pet</label>
+                        <i class="fas fa-paw"></i>
+
+                        <input type="text" name="pettype" id="pettype" placeholder="Crab Cat" />
+
+                        <i class="fas fa-exclamation-circle failure-icon3"></i>
+                        <i class="far fa-check-circle success-icon3"></i>
+
+                        <div class="error3"></div>
+
+                    </div>
+                    <!--   Breed of Pet input -->
+                    <div>
+                        <label for="petbreed">Breed of Pet</label>
+                        <i class="fas fa-paw"></i>
+
+                        <input type="text" name="petbreed" id="petbreed" placeholder="Siamese" />
+
+                        <i class="fas fa-exclamation-circle failure-icon3"></i>
+                        <i class="far fa-check-circle success-icon3"></i>
+
+                        <div class="error3"></div>
+
+                    </div>
+                    <!--Pet Gender-->
+                    <div>
+                        <label for="petgender">Pet Gender</label>
+                        <i class="fas fa-venus-mars"></i>
+                        <select class="form-select" id="petgender">
+                            <option value="none" selected disabled hidden>Select an Option</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="genunkn">Gender Unknown</option>
+                        </select>
+
+                        <i class="fas fa-exclamation-circle failure-icon3"></i>
+                        <i class="far fa-check-circle success-icon3"></i>
+
+                        <div class="error3"></div>
+                    </div>
+                    <!--Pet Status Report-->
+                    <div>
+                        <label for="petstatus">Pet Status Report</label>
+                        <i class="fas fa-paw"></i>
+                        <select class="form-select" id="petstatus">
+                            <option value="none" selected disabled hidden>Select an Option</option>
+                            <option value="lost">Lost</option>
+                            <option value="found">Found</option>
+                            <option value="stolen">Stolen</option>
+                            <option value="foundceased">Found-Decesased</option>
+                        </select>
+
+                        <i class="fas fa-exclamation-circle failure-icon3"></i>
+                        <i class="far fa-check-circle success-icon3"></i>
+
+                        <div class="error3"></div>
+                    </div>
+                    <!--Pet Age-->
+                    <div>
+                        <label for="petage">Pet Age</label>
+                        <i class="fas fa-calendar-day"></i>
+                        <select class="form-select" id="petage">
+                            <option value="none" selected disabled hidden>Select an Option</option>
+                            <option value="baby">Baby</option>
+                            <option value="young">Young adult</option>
+                            <option value="adult">Adult</option>
+                            <option value="senior">Senior</option>
+                            <option value="unkage">Unknown age</option>
+                        </select>
+
+                        <i class="fas fa-exclamation-circle failure-icon3"></i>
+                        <i class="far fa-check-circle success-icon3"></i>
+
+                        <div class="error3"></div>
+                    </div>
+                    <!--Pet Size-->
+                    <div>
+                        <label for="petsize">Pet Size</label>
+                        <i class="fas fa-weight"></i>
+                        <select class="form-select" id="petsize">
+                            <option value="none" selected disabled hidden>Select an Option</option>
+                            <option value="small">Small(0-20 lbs)</option>
+                            <option value="medium">Medium(25-50 lbs)</option>
+                            <option value="large">Large(Over 50 lbs)</option>
+                        </select>
+
+                        <i class="fas fa-exclamation-circle failure-icon3"></i>
+                        <i class="far fa-check-circle success-icon3"></i>
+
+                        <div class="error3"></div>
+                    </div>
+                    <!--Date Lost-Found-->
+                    <div>
+                        <label for="datelostfound">Date Lost/Found</label>
+                        <i class="fas fa-calendar"></i>
+                        <input type="date" id="datelostfound">
+
+                        <i class="fas fa-exclamation-circle failure-icon3"></i>
+                        <i class="far fa-check-circle success-icon3"></i>
+
+                        <div class="error3"></div>
+                    </div>
+                    <!--   City where Pet was lost/found input -->
+                    <div>
+                        <label for="city">City where Pet was lost/found</label>
+                        <i class="fas fa-city"></i>
+
+                        <input type="text" name="city" id="city" placeholder="Havana" />
+
+                        <i class="fas fa-exclamation-circle failure-icon3"></i>
+                        <i class="far fa-check-circle success-icon3"></i>
+
+                        <div class="error3"></div>
+
+                    </div>
+                    <!--The action that the pet was doing -->
+                    <label>Pet Was (Check all that apply)</label>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="check1" name="option1" value="something"
+                            checked>
+                        <label class="form-check-label" for="check1">Wearing collar or harness.</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="check2" name="option2" value="something">
+                        <label class="form-check-label" for="check2">Wearing ID tags.</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="check3" name="option2" value="something">
+                        <label class="form-check-label" for="check3">No collar.</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="check4" name="option2" value="something">
+                        <label class="form-check-label" for="check4">Microchipped.</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="check5" name="option2" value="something">
+                        <label class="form-check-label" for="check5">Not microchipped.</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="check6" name="option2" value="something">
+                        <label class="form-check-label" for="check6">Has not yet been scanned for a microchip.</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="check7" name="option2" value="something">
+                        <label class="form-check-label" for="check7">Has an ID tattoo.</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="check8" name="option2" value="something">
+                        <label class="form-check-label" for="check8">Bird wearing a band on it's leg.</label>
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <div class=" w-100 d-grid">
+                        <button id="modal3Btn" type="submit" class="btn btn-outline-danger">Submit</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+
+</body>
+<script src="./js/app.js"></script>
+<script src="./js/validations.js"></script>
+
+</html>
