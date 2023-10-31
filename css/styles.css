@@ -35,7 +35,8 @@ label {
 * ! Style rules for form input
 */
 form div input,
-.form-select {
+.form-select,
+.form-control {
   width: 95%;
   height: 40px;
   border-radius: 8px;
@@ -65,13 +66,16 @@ form div i {
 */
 .failure-icon,
 .failure-icon2,
+.failure-icon3,
 .error,
-.error2 {
+.error2,
+.error3 {
   color: red;
 }
 
 .success-icon,
-.success-icon2 {
+.success-icon2,
+.success-icon3 {
   color: green;
 }
 

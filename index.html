@@ -44,7 +44,10 @@
                         data-bs-target="#signUpModal">Sign Up</button>
                 </div>
             </div>
+            <!-- Pet Picture preview -->
+
             <div class="col-sm-4 -mb-3">
+                <div id="imagePreview"></div>
                 <h3 class="text-center">Register Your Pet</h3>
                 <br>
                 <div class="d-grid">
@@ -184,12 +187,13 @@
 
                 <!-- Modal body -->
                 <div class="modal-body">
+
                     <!-- Pet Name input -->
                     <div>
-                        <label for="petname">Pet Name</label>
+                        <label for="petName">Pet Name</label>
                         <i class="fas fa-dog"></i>
 
-                        <input type="text" name="petname" id="petname" placeholder="Rocky Loo" />
+                        <input type="text" name="petName" id="petName" placeholder="Rocky Loo" />
 
                         <i class="fas fa-exclamation-circle failure-icon3"></i>
                         <i class="far fa-check-circle success-icon3"></i>
@@ -197,12 +201,24 @@
                         <div class="error3"></div>
 
                     </div>
+                    <div>
+                        <!--Picture of the missing Pet Upload-->
+                        <!-- File input field -->
+                        <label for="petPicture">Upload a Picture of the Missing Pet</label>
+                        <i class="fas fa-dog"></i>
+                        <input type="file" id="petPicture" />
+
+                        <i class="fas fa-exclamation-circle failure-icon3"></i>
+                        <i class="far fa-check-circle success-icon3"></i>
+
+                        <div class="error3"></div>
+                    </div>
                     <!-- Type of Pet input -->
                     <div>
-                        <label for="pettype">Type of Pet</label>
+                        <label for="petType">Type of Pet</label>
                         <i class="fas fa-paw"></i>
 
-                        <input type="text" name="pettype" id="pettype" placeholder="Crab Cat" />
+                        <input type="text" name="petType" id="petType" placeholder="Crab Cat" />
 
                         <i class="fas fa-exclamation-circle failure-icon3"></i>
                         <i class="far fa-check-circle success-icon3"></i>
@@ -212,10 +228,10 @@
                     </div>
                     <!--   Breed of Pet input -->
                     <div>
-                        <label for="petbreed">Breed of Pet</label>
+                        <label for="petBreed">Breed of Pet</label>
                         <i class="fas fa-paw"></i>
 
-                        <input type="text" name="petbreed" id="petbreed" placeholder="Siamese" />
+                        <input type="text" name="petBreed" id="petBreed" placeholder="Siamese" />
 
                         <i class="fas fa-exclamation-circle failure-icon3"></i>
                         <i class="far fa-check-circle success-icon3"></i>
@@ -225,9 +241,9 @@
                     </div>
                     <!--Pet Gender-->
                     <div>
-                        <label for="petgender">Pet Gender</label>
+                        <label for="petGender">Pet Gender</label>
                         <i class="fas fa-venus-mars"></i>
-                        <select class="form-select" id="petgender">
+                        <select class="form-select" id="petGender">
                             <option value="none" selected disabled hidden>Select an Option</option>
                             <option value="male">Male</option>
                             <option value="female">Female</option>
@@ -241,9 +257,9 @@
                     </div>
                     <!--Pet Status Report-->
                     <div>
-                        <label for="petstatus">Pet Status Report</label>
+                        <label for="petStatus">Pet Status Report</label>
                         <i class="fas fa-paw"></i>
-                        <select class="form-select" id="petstatus">
+                        <select class="form-select" id="petStatus">
                             <option value="none" selected disabled hidden>Select an Option</option>
                             <option value="lost">Lost</option>
                             <option value="found">Found</option>
@@ -258,9 +274,9 @@
                     </div>
                     <!--Pet Age-->
                     <div>
-                        <label for="petage">Pet Age</label>
+                        <label for="petAge">Pet Age</label>
                         <i class="fas fa-calendar-day"></i>
-                        <select class="form-select" id="petage">
+                        <select class="form-select" id="petAge">
                             <option value="none" selected disabled hidden>Select an Option</option>
                             <option value="baby">Baby</option>
                             <option value="young">Young adult</option>
@@ -276,9 +292,9 @@
                     </div>
                     <!--Pet Size-->
                     <div>
-                        <label for="petsize">Pet Size</label>
+                        <label for="petSize">Pet Size</label>
                         <i class="fas fa-weight"></i>
-                        <select class="form-select" id="petsize">
+                        <select class="form-select" id="petSize">
                             <option value="none" selected disabled hidden>Select an Option</option>
                             <option value="small">Small(0-20 lbs)</option>
                             <option value="medium">Medium(25-50 lbs)</option>
@@ -292,9 +308,9 @@
                     </div>
                     <!--Date Lost-Found-->
                     <div>
-                        <label for="datelostfound">Date Lost/Found</label>
+                        <label for="dateLostfound">Date Lost/Found</label>
                         <i class="fas fa-calendar"></i>
-                        <input type="date" id="datelostfound">
+                        <input type="date" id="dateLostfound">
 
                         <i class="fas fa-exclamation-circle failure-icon3"></i>
                         <i class="far fa-check-circle success-icon3"></i>
@@ -307,6 +323,56 @@
                         <i class="fas fa-city"></i>
 
                         <input type="text" name="city" id="city" placeholder="Havana" />
+
+                        <i class="fas fa-exclamation-circle failure-icon3"></i>
+                        <i class="far fa-check-circle success-icon3"></i>
+
+                        <div class="error3"></div>
+
+                    </div>
+                    <div>
+                        <!--Any additional info to help improve the pet search -->
+                        <label for="comment">Any additional info to help improve the pet search</label>
+                        <i class="fas fa-clipboard"></i>
+                        <textarea class="form-control" rows="4" id="comment" name="text"></textarea>
+
+                        <i class="fas fa-exclamation-circle failure-icon3"></i>
+                        <i class="far fa-check-circle success-icon3"></i>
+
+                        <div class="error3"></div>
+                    </div>
+                    <!--   Contact Name -->
+                    <div>
+                        <label for="contactName">Contact Name</label>
+                        <i class="fas fa-address-book"></i>
+
+                        <input type="text" name="contactName" id="contactName" placeholder="LeudiX" />
+
+                        <i class="fas fa-exclamation-circle failure-icon3"></i>
+                        <i class="far fa-check-circle success-icon3"></i>
+
+                        <div class="error3"></div>
+
+                    </div>
+                    <!--   Contact Phone -->
+                    <div>
+                        <label for="contactPhone">Contact Phone</label>
+                        <i class="fas fa-phone"></i>
+
+                        <input type="text" name="contactPhone" id="contactPhone" placeholder="+53 5xxxxx8" />
+
+                        <i class="fas fa-exclamation-circle failure-icon3"></i>
+                        <i class="far fa-check-circle success-icon3"></i>
+
+                        <div class="error3"></div>
+
+                    </div>
+                    <!--   Contact Email-->
+                    <div>
+                        <label for="contactEmail">Contact Email</label>
+                        <i class="fas fa-envelope"></i>
+
+                        <input type="text" name="contactEmail" id="contactEmail" placeholder="roddy@hotmail.com" />
 
                         <i class="fas fa-exclamation-circle failure-icon3"></i>
                         <i class="far fa-check-circle success-icon3"></i>
