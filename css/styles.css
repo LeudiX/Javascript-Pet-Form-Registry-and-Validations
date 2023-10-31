@@ -1,11 +1,12 @@
 /**
 *! Modal Animation entry
 */
+/*Using modal fade class on 1st modal to see animation*/
+
 .animatetop {
   animation-name: animate;
   animation-duration: 0.4s;
 }
-
 /**
 *! Add Animation 
 */
@@ -43,10 +44,11 @@ form div input,
   padding: 0 35px;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
+
 /**
 * ! Style rules for form checkbox inputs 
 */
-input[type="checkbox"]{
+input[type="checkbox"] {
   padding: 0;
 }
 
