@@ -47,12 +47,62 @@
             <!-- Pet Picture preview -->
 
             <div class="col-sm-4 -mb-3">
-                <div class="text-center" id="imagePreview"></div>
+
                 <h3 class="text-center">Register Your Pet</h3>
                 <br>
                 <div class="d-grid">
                     <button id="b3" type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
                         data-bs-target="#dataEntryModal">Register now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Area for displaying cards with missing pet information-->
+    <div class="container mt-5">
+        <h3 class="text-center">Missing Pets Album</h3>
+        <div class="row">
+            <div class="col-sm-4 mb-3">
+                <br>
+                <div class="d-grid">
+                    <div class="card">
+                        <img class="card-img-top img-fluid mx-auto d-block"
+                            src="./img/img_avatar1.png" alt="Card image">
+                        <div class="card-body">
+                            <h4 class="card-title text-center">John Doe</h4>
+                            <p class="card-text">Some example text.</p>
+                            <a href="#" class="btn btn-outline-primary d-grid">See Profile</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 mb-3">
+                <br>
+                <div class="d-grid">
+                    <div class="card">
+                        <img class="card-img-top img-fluid mx-auto d-block"
+                            src="./img/img_avatar1.png" alt="Card image">
+                        <div class="card-body">
+                            <h4 class="card-title text-center">John Doe</h4>
+                            <p class="card-text">Some example text.</p>
+                            <a href="#" class="btn btn-outline-primary d-grid">See Profile</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 -mb-3">
+                <!-- Pet Picture preview -->
+                <div class="text-center" id="imagePreview"></div>
+                <br>
+                <div class="d-grid">
+                    <div class="card">
+                        <img class="card-img-top img-fluid mx-auto d-block" id="imagePreview"
+                            src="./img/img_avatar1.png" alt="Missed Pet Picture">
+                        <div class="card-body">
+                            <h4 class="card-title text-center">John Doe</h4>
+                            <p class="card-text">Some example text.</p>
+                            <a href="#" class="btn btn-outline-primary d-grid">See Profile</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -359,7 +409,7 @@
                         <label for="contactPhone">Contact Phone</label>
                         <i class="fas fa-phone"></i>
 
-                        <input type="text" name="contactPhone" id="contactPhone" placeholder="+53 5xxxxx8" />
+                        <input type="number" name="contactPhone" id="contactPhone" placeholder="+53 5xxxxx8" />
 
                         <i class="fas fa-exclamation-circle failure-icon3"></i>
                         <i class="far fa-check-circle success-icon3"></i>
@@ -372,7 +422,7 @@
                         <label for="contactEmail">Contact Email</label>
                         <i class="fas fa-envelope"></i>
 
-                        <input type="text" name="contactEmail" id="contactEmail" placeholder="roddy@hotmail.com" />
+                        <input type="email" name="contactEmail" id="contactEmail" placeholder="roddy@hotmail.com" />
 
                         <i class="fas fa-exclamation-circle failure-icon3"></i>
                         <i class="far fa-check-circle success-icon3"></i>

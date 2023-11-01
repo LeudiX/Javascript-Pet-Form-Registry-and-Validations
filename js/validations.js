@@ -18,6 +18,8 @@ let email = id("email"),
 
 // Targeting First Modal form and add the submit event listener
 form.addEventListener("submit", (e) => {
+
+    //Prevent the form from submmiting event
     e.preventDefault();
 
     //Calling formValid function from below
@@ -62,6 +64,8 @@ let username = id("username"),
 
 // Targeting Second Modal form and add the submit event listener
 form2.addEventListener("submit", (e) => {
+    
+    //Prevent the form from submmiting event
     e.preventDefault();
 
     //Calling formValid function from below
@@ -106,6 +110,8 @@ let petName = id("petName"),
 
 // Targeting Third Modal form and add the submit event listener
 form3.addEventListener("submit", (e) => {
+
+    //Prevent the form from submmiting event
     e.preventDefault();
 
     //Calling formValid functions from below
