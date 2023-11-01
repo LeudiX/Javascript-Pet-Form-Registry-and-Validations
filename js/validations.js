@@ -7,7 +7,7 @@ let id = (id) => document.getElementById(id);
 
 let classes = (classes) => document.getElementsByClassName(classes);
 
-//Storing FirstModal form classes and id's inside these variables
+//Storing First Modal form classes and id's inside these variables
 let email = id("email"),
     password = id("password"),
     form = id("signInModal"),
@@ -16,7 +16,7 @@ let email = id("email"),
     successIcon = classes("success-icon"),
     failureIcon = classes("failure-icon");
 
-// Targeting FirstModal form and add the submit event listener
+// Targeting First Modal form and add the submit event listener
 form.addEventListener("submit", (e) => {
     e.preventDefault();
 
@@ -50,7 +50,7 @@ let formValid = (id, serial, message) => {
 * ! Handling validations with Js in the signUpModal Form
 */
 
-//Storing SecondModal form classes and id's inside these variables
+//Storing Second Modal form classes and id's inside these variables
 let username = id("username"),
     email2 = id("email2"),
     password2 = id("password2"),
@@ -60,7 +60,7 @@ let username = id("username"),
     successIcon2 = classes("success-icon2"),
     failureIcon2 = classes("failure-icon2");
 
-// Targeting SecondModal form and add the submit event listener
+// Targeting Second Modal form and add the submit event listener
 form2.addEventListener("submit", (e) => {
     e.preventDefault();
 
@@ -94,7 +94,7 @@ let formValid2 = (id, serial, message) => {
 /**
 * ! Handling validations with Js in the Missed Pet Data Entry Form Modal
 */
-//Storing SecondModal form classes and id's inside these variables
+//Storing Third Modal form classes and id's inside these variables
 let petName = id("petName"),
     petPicture = id("petPicture"),
     petType = id("petType"),
@@ -104,17 +104,14 @@ let petName = id("petName"),
     successIcon3 = classes("success-icon3"),
     failureIcon3 = classes("failure-icon3");
 
-
-// Targeting SecondModal form and add the submit event listener
+// Targeting Third Modal form and add the submit event listener
 form3.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    //Calling formValid and petPictureValid functions from below
+    //Calling formValid functions from below
     formValid3(petName, 0, "Pet name cannot be blank");
-
     //Targeting the File Upload Missing Pet Picture Validation
     petPictureValid(petPicture, 1, "Invalid file type. Pet picture most be in the specified format: .jpg, .jpeg, .png, .gif");
-    
     formValid3(petType, 2, "Pet type cannot be blank");
 });
 
@@ -169,12 +166,11 @@ function petPictureValid(id, serial, message) {
                 document.getElementById(
                     'imagePreview').innerHTML =
                     '<img src="' + e.target.result
-                    + '"/>';
+                    + '"class="center" style="width: 25%;"/>';
             };
-
+            errorMsg3[serial].innerHTML = '';
             reader.readAsDataURL(fileInput.files[0]);
 
-            errorMsg3[serial].innerHTML = "Pet Picture Succesfully Uploaded";
             id.style.border = "2px solid green"; //showing green border color
 
             //icons
