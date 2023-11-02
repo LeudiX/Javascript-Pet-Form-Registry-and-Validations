@@ -1,12 +1,23 @@
+/* Hide scrollbar for Chrome, Safari and Opera */
+body::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+body {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
 /**
 *! Modal Animation entry
 */
 /*Using modal fade class on 1st modal to see animation*/
-
 .animatetop {
   animation-name: animate;
   animation-duration: 0.4s;
 }
+
 /**
 *! Add Animation 
 */
@@ -32,7 +43,7 @@ label {
 }
 
 /**
-* ! Style rules for form input
+* ! Style rules for form input types
 */
 form div input,
 .form-select,
@@ -44,6 +55,11 @@ form div input,
   border: 2px solid #c4c4c4;
   padding: 0 35px;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+.form-control{
+  display: inline; /*Fixed troubles related with bootstrap-5 form control and icons errors status*/
 }
 
 /**

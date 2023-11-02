@@ -23,8 +23,8 @@ form.addEventListener("submit", (e) => {
     e.preventDefault();
 
     //Calling formValid function from below
-    formValid(email, 0, "Email cannot be blank");
-    formValid(password, 1, "Password cannot be blank");
+    formValid(email, 0, "Email is required");
+    formValid(password, 1, "Password is required");
 });
 
 // Creating a generic function wich will make all kind of sorts form validations for the FirstModal form
@@ -64,14 +64,14 @@ let username = id("username"),
 
 // Targeting Second Modal form and add the submit event listener
 form2.addEventListener("submit", (e) => {
-    
+
     //Prevent the form from submmiting event
     e.preventDefault();
 
     //Calling formValid function from below
-    formValid2(username, 0, "Usename cannot be blank");
-    formValid2(email2, 1, "Email cannot be blank");
-    formValid2(password2, 2, "Password cannot be blank");
+    formValid2(username, 0, "Usename is required");
+    formValid2(email2, 1, "Email is required");
+    formValid2(password2, 2, "Password is required");
 });
 
 // Creating a generic function wich will make all kind of sorts form validations for the FirstModal form
@@ -102,11 +102,28 @@ let formValid2 = (id, serial, message) => {
 let petName = id("petName"),
     petPicture = id("petPicture"),
     petType = id("petType"),
+    petBreed = id("petBreed"),
+    petGender = id("petGender"),
+    petStatus = id("petStatus"),
+    petAge = id("petAge"),
+    petSize = id("petSize"),
+    city = id("city"),
+    comment = id("comment"),
+    contactName = id("contactName"),
+    contactPhone = id("contactPhone"),
+    contactEmail = id("contactEmail"),
     form3 = id("dataEntryModal"),
 
     errorMsg3 = classes("error3"),
     successIcon3 = classes("success-icon3"),
     failureIcon3 = classes("failure-icon3");
+
+//Specific errors messages for each input field
+const petNameM = ["Pet name is required", "Pet name must be between 2 and 8 characters"];
+const petPictureM = "Pet picture is required and most be in the specified format: .jpg, .jpeg, .png, .gif";
+const petTypeM = ["Pet type is required", "Pet type must be between 3 and 8 characters"];
+const petBreedM = ["Pet breed is required", "Pet breed must be between 3 and 8 characters"];
+
 
 // Targeting Third Modal form and add the submit event listener
 form3.addEventListener("submit", (e) => {
@@ -114,36 +131,52 @@ form3.addEventListener("submit", (e) => {
     //Prevent the form from submmiting event
     e.preventDefault();
 
-    //Calling formValid functions from below
-    formValid3(petName, 0, "Pet name cannot be blank");
+    //Targeting notBlankValid function from below to avoid empty inputs fields
+    ValidateForm3(petName, 2, 8, 0, petNameM);
+    ValidateForm3(petType, 3, 8, 2, petTypeM);
+    ValidateForm3(petBreed, 3, 8, 3, petBreedM);
+
     //Targeting the File Upload Missing Pet Picture Validation
-    petPictureValid(petPicture, 1, "Invalid file type. Pet picture most be in the specified format: .jpg, .jpeg, .png, .gif");
-    formValid3(petType, 2, "Pet type cannot be blank");
+    petPictureValid(petPicture, 1, petPictureM);
+
+    /*
+    notBlankValid(city, 9, "City field is required");
+    notBlankValid(comment, 10, "Comments field is required");
+    notBlankValid(contactName, 11, "Contact name field is required");
+    notBlankValid(contactPhone, 12, "Contact phone field is required");
+    notBlankValid(contactEmail, 13, "Contact email field is required");
+
+    //Targeting isBetweenValid function from below to validate input values between a certain no. of characters
+    isBetweenValid(comment, 20, 125, 10, `Comments must be between 20 and 125 characters`);
+    isBetweenValid(contactName, 3, 12, 11, `Contact name must be between 3 and 12 characters`);
+    */
 });
 
+//Generic Mother function wich will call all validations functions made it below
+const ValidateForm3 = (id, min, max, serial, messages) => {
+    let valid = false;
 
-// Creating a generic function wich will make all kind of sorts form validations for the FirstModal form
-let formValid3 = (id, serial, message) => {
-    //Removing all the extra white spaces from the value which the user inputs.
-    if (id.value.trim() === "") {
-        errorMsg3[serial].innerHTML = message;
-        id.style.border = "2px solid red"; //showing red border color
-
-        //icons
-        failureIcon3[serial].style.opacity = "1"; //showing  red error icon
-        successIcon3[serial].style.opacity = "0";
+    if (!notBlankValid(id)) {
+        showErrorM(id, serial, messages[0]);
+    } else if (!isBetweenValid(id, min, max)) {
+        showErrorM(id, serial, messages[1]);
+    } else {
+        showSuccessM(id, serial);
+        valid = true;
     }
-    else {
-        errorMsg3[serial].innerHTML = "";
-        id.style.border = "2px solid green"; //showing green border color
-
-        //icons
-        failureIcon3[serial].style.opacity = "0";
-        successIcon3[serial].style.opacity = "1"; //showing green success icon
-    }
+    return valid;
 }
 
-
+//Generic function wich will validate empty field form validations in the ThirdModal 
+let notBlankValid = (id) => {
+    //Checking if the user inputs is empty.
+    if (id.value.trim() === "") {
+        return false;
+    }
+    else {
+        return true;
+    }
+}
 //Handling Pet Picture Profile upload validation
 function petPictureValid(id, serial, message) {
     const fileInput = id;
@@ -155,12 +188,7 @@ function petPictureValid(id, serial, message) {
         /(\.jpg|\.jpeg|\.png|\.gif)$/i;
 
     if (!allowedExtensions.exec(filePath)) {
-        errorMsg3[serial].innerHTML = message;
-        id.style.border = "2px solid red"; //showing red border color
-
-        //icons
-        failureIcon3[serial].style.opacity = "1"; //showing  red error icon
-        successIcon3[serial].style.opacity = "0";
+        showErrorM(id, serial, message); //showErrorM
         fileInput.value = '';
         return false;
     }
@@ -170,18 +198,50 @@ function petPictureValid(id, serial, message) {
             var reader = new FileReader();
             reader.onload = function (e) {
                 document.getElementById(
-                    'imagePreview').innerHTML =
-                    '<img src="' + e.target.result
-                    + '"class="center" style="width: 25%;"/>';
+                    'imagePreview').src =
+                    e.target.result; //Changing the attribute of the specified element obtained by id
             };
-            errorMsg3[serial].innerHTML = '';
+            showSuccessM(id, serial); //showSuccessM
             reader.readAsDataURL(fileInput.files[0]);
-
-            id.style.border = "2px solid green"; //showing green border color
-
-            //icons
-            failureIcon3[serial].style.opacity = "0";
-            successIcon3[serial].style.opacity = "1"; //showing green success icon
         }
     }
 }
+//Generic function wich will validate input values between a certain no. of characters
+let isBetweenValid = (id, min, max) => {
+
+    //Length of the input field data entried by user  
+    const length = id.value.trim().length;
+
+    if (length < min || length > max) {
+        return false;
+    }
+    else {
+        return true;
+    }
+
+}
+
+//Phone Number Validation
+
+//Generic function for handling error messages and icons changes status
+const showErrorM = (id, serial, message) => {
+
+    errorMsg3[serial].innerHTML = message;
+    id.style.border = "2px solid red"; //showing red border color
+
+    //icons
+    failureIcon3[serial].style.opacity = "1"; //showing  red error icon
+    successIcon3[serial].style.opacity = "0";
+}
+
+//Generic function for handling success messages and icons changes status
+const showSuccessM = (id, serial) => {
+
+    errorMsg3[serial].innerHTML = "";
+    id.style.border = "2px solid green"; //showing green border color
+
+    //icons
+    failureIcon3[serial].style.opacity = "0";
+    successIcon3[serial].style.opacity = "1"; //showing green success icon
+}
+
