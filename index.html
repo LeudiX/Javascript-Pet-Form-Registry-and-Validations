@@ -311,7 +311,7 @@
                         <label for="petGender">Pet Gender</label>
                         <i class="fas fa-venus-mars"></i>
                         <select class="form-select" id="petGender">
-                            <option value="none" selected disabled hidden>Select an Option</option>
+                            <option value="none" selected disabled hidden>Select the pet gender</option>
                             <option value="male">Male</option>
                             <option value="female">Female</option>
                             <option value="genunkn">Gender Unknown</option>
@@ -327,7 +327,7 @@
                         <label for="petStatus">Pet Status Report</label>
                         <i class="fas fa-paw"></i>
                         <select class="form-select" id="petStatus">
-                            <option value="none" selected disabled hidden>Select an Option</option>
+                            <option value="none" selected disabled hidden>Select a pet status report</option>
                             <option value="lost">Lost</option>
                             <option value="found">Found</option>
                             <option value="stolen">Stolen</option>
@@ -344,7 +344,7 @@
                         <label for="petAge">Pet Age</label>
                         <i class="fas fa-calendar-day"></i>
                         <select class="form-select" id="petAge">
-                            <option value="none" selected disabled hidden>Select an Option</option>
+                            <option value="none" selected disabled hidden>Select estimated pet age</option>
                             <option value="baby">Baby</option>
                             <option value="young">Young adult</option>
                             <option value="adult">Adult</option>
@@ -362,7 +362,7 @@
                         <label for="petSize">Pet Size</label>
                         <i class="fas fa-weight"></i>
                         <select class="form-select" id="petSize">
-                            <option value="none" selected disabled hidden>Select an Option</option>
+                            <option value="none" selected disabled hidden>Select estimated pet size</option>
                             <option value="small">Small(0-20 lbs)</option>
                             <option value="medium">Medium(25-50 lbs)</option>
                             <option value="large">Large(Over 50 lbs)</option>
@@ -389,7 +389,16 @@
                         <label for="city">City where Pet was lost/found</label>
                         <i class="fas fa-city"></i>
 
-                        <input type="text" name="city" id="city" placeholder="Havana" />
+                        <select class="form-select" id="city">
+                            <option value="none" selected disabled hidden>Select a City</option>
+                            <option value="havana">Havana</option>
+                            <option value="santiago">Santiago</option>
+                            <option value="matanzas">Matanzas</option>
+                            <option value="artemisa">Artemisa</option>
+                            <option value="staclara">Santa Clara</option>
+                            <option value="Holguín">Holguín</option>
+                            <option value="bayamo">Bayamo</option>
+                        </select>
 
                         <i class="fas fa-exclamation-circle failure-icon3"></i>
                         <i class="far fa-check-circle success-icon3"></i>
@@ -426,7 +435,7 @@
                         <label for="contactPhone">Contact Phone</label>
                         <i class="fas fa-phone"></i>
 
-                        <input type="number" name="contactPhone" id="contactPhone" placeholder="+53 5xxxxx8" />
+                        <input type="tel" name="contactPhone" id="contactPhone" placeholder="+53 5xxxxx8" />
 
                         <i class="fas fa-exclamation-circle failure-icon3"></i>
                         <i class="far fa-check-circle success-icon3"></i>

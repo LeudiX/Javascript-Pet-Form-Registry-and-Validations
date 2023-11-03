@@ -123,6 +123,10 @@ const petNameM = ["Pet name is required", "Pet name must be between 2 and 8 char
 const petPictureM = "Pet picture is required and most be in the specified format: .jpg, .jpeg, .png, .gif";
 const petTypeM = ["Pet type is required", "Pet type must be between 3 and 8 characters"];
 const petBreedM = ["Pet breed is required", "Pet breed must be between 3 and 8 characters"];
+const commentM = ["Comments field is required", "Comments must be between 20 and 125 characters"];
+const contactNM = ["Contact name field is required", "Contact name must be between 3 and 8 characters"];
+const contactPM = ["Contact phone field is required", "Valid phone number must be between 7 and 15 digits", "Invalid phone number"];
+const contactEM = ["Contact email field is required", "Invalid email"];
 
 
 // Targeting Third Modal form and add the submit event listener
@@ -131,43 +135,90 @@ form3.addEventListener("submit", (e) => {
     //Prevent the form from submmiting event
     e.preventDefault();
 
-    //Targeting notBlankValid function from below to avoid empty inputs fields
-    ValidateForm3(petName, 2, 8, 0, petNameM);
-    ValidateForm3(petType, 3, 8, 2, petTypeM);
-    ValidateForm3(petBreed, 3, 8, 3, petBreedM);
+    //Targeting ValNotBlankandLength function to avoid empty inputs fields and constraint its length 
+    ValNotBlankandLength(petName, 2, 8, 0, petNameM);
+    ValNotBlankandLength(petType, 3, 8, 2, petTypeM);
+    ValNotBlankandLength(petBreed, 3, 8, 3, petBreedM);
+    ValNotBlankandLength(comment, 20, 125, 10, commentM);
+    ValNotBlankandLength(contactName, 3, 8, 11, contactNM);
 
     //Targeting the File Upload Missing Pet Picture Validation
     petPictureValid(petPicture, 1, petPictureM);
 
-    /*
-    notBlankValid(city, 9, "City field is required");
-    notBlankValid(comment, 10, "Comments field is required");
-    notBlankValid(contactName, 11, "Contact name field is required");
-    notBlankValid(contactPhone, 12, "Contact phone field is required");
-    notBlankValid(contactEmail, 13, "Contact email field is required");
+    //Validating the contact phone input field correct format
+    isPhoneValid(contactPhone, 7, 15, 12, contactPM);
 
-    //Targeting isBetweenValid function from below to validate input values between a certain no. of characters
-    isBetweenValid(comment, 20, 125, 10, `Comments must be between 20 and 125 characters`);
-    isBetweenValid(contactName, 3, 12, 11, `Contact name must be between 3 and 12 characters`);
-    */
+    //Validating the correct format of the email input field and that it is not empty
+    isEmailValid(contactEmail, 13, contactEM);
 });
 
-//Generic Mother function wich will call all validations functions made it below
-const ValidateForm3 = (id, min, max, serial, messages) => {
+//Not Blank and desired input fields length validations
+const ValNotBlankandLength = (id, min, max, serial, messages) => {
     let valid = false;
 
     if (!notBlankValid(id)) {
         showErrorM(id, serial, messages[0]);
-    } else if (!isBetweenValid(id, min, max)) {
+    }
+    else if (!isBetweenValid(id, min, max)) {
         showErrorM(id, serial, messages[1]);
-    } else {
+    }
+    else {
         showSuccessM(id, serial);
         valid = true;
     }
     return valid;
 }
 
-//Generic function wich will validate empty field form validations in the ThirdModal 
+//Email Validation
+const isEmailValid = (id, serial, messages) => {
+    let valid = false;
+
+    //Email input field value without empty whitspaces
+    const email = id.value.trim();
+    //A reg exp for validate email format
+    const reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    if (!notBlankValid(id)) {
+        showErrorM(id, serial, messages[0]); //showErrorM
+    }
+    else if (!reg.test(email)) {
+        showErrorM(id, serial, messages[1]); //showErrorM
+    }
+    else {
+        showSuccessM(id, serial); //showSuccessM
+        valid = true;
+    }
+    return valid;
+}
+
+//Phone Number Validation
+const isPhoneValid = (id, min, max, serial, messages) => {
+    let valid = false;
+
+    //Phone no. input field value without empty whitspaces
+    const num = id.value.trim();
+
+    const regexp = /^[\+]?([0-9][\s]?|[0-9]?)([(][0-9]{3}[)][\s]?|[0-9]{3}[-\s\.]?)[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+
+    if (!notBlankValid(id)) {
+        //phone numbers field is required
+        showErrorM(id, serial, messages[0]); //showErrorM
+    }
+    else if (!isBetweenValid(id, min, max)) {
+        //phone numbers are generally of 7 to 15 digits
+        showErrorM(id, serial, messages[1]); //showErrorM
+    }
+    else if (!regexp.test(num)) {
+        showErrorM(id, serial, messages[2]); //showErrorM
+    }
+    else {
+        showSuccessM(id, serial); //showSuccessM
+        valid = true;
+    }
+    return valid;
+}
+
+//3rd Modal Empty field validations
 let notBlankValid = (id) => {
     //Checking if the user inputs is empty.
     if (id.value.trim() === "") {
@@ -177,7 +228,8 @@ let notBlankValid = (id) => {
         return true;
     }
 }
-//Handling Pet Picture Profile upload validation
+
+//Pet Picture Profile upload validation
 function petPictureValid(id, serial, message) {
     const fileInput = id;
 
@@ -199,17 +251,18 @@ function petPictureValid(id, serial, message) {
             reader.onload = function (e) {
                 document.getElementById(
                     'imagePreview').src =
-                    e.target.result; //Changing the attribute of the specified element obtained by id
+                    e.target.result; //Changing the attribute (src) value of the specified element obtained by id
             };
             showSuccessM(id, serial); //showSuccessM
             reader.readAsDataURL(fileInput.files[0]);
         }
     }
 }
-//Generic function wich will validate input values between a certain no. of characters
+
+//Between Min and Max input fields validation
 let isBetweenValid = (id, min, max) => {
 
-    //Length of the input field data entried by user  
+    //Obtaining the length of the input field data entried by user  
     const length = id.value.trim().length;
 
     if (length < min || length > max) {
@@ -221,9 +274,7 @@ let isBetweenValid = (id, min, max) => {
 
 }
 
-//Phone Number Validation
-
-//Generic function for handling error messages and icons changes status
+//Show red error messages and icons changes
 const showErrorM = (id, serial, message) => {
 
     errorMsg3[serial].innerHTML = message;
@@ -234,7 +285,7 @@ const showErrorM = (id, serial, message) => {
     successIcon3[serial].style.opacity = "0";
 }
 
-//Generic function for handling success messages and icons changes status
+//Show green success messages and icons changes
 const showSuccessM = (id, serial) => {
 
     errorMsg3[serial].innerHTML = "";
