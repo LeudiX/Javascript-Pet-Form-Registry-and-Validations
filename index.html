@@ -268,8 +268,8 @@
                         <div class="error3"></div>
 
                     </div>
+                    <!--Picture of the missing Pet Upload-->
                     <div>
-                        <!--Picture of the missing Pet Upload-->
                         <!-- File input field -->
                         <label for="petPicture">Upload a Picture of the Missing Pet</label>
                         <i class="fas fa-dog"></i>
@@ -384,7 +384,7 @@
 
                         <div class="error3"></div>
                     </div>
-                    <!--   City where Pet was lost/found input -->
+                    <!--City where Pet was lost/found input -->
                     <div>
                         <label for="city">City where Pet was lost/found</label>
                         <i class="fas fa-city"></i>
@@ -396,7 +396,7 @@
                             <option value="matanzas">Matanzas</option>
                             <option value="artemisa">Artemisa</option>
                             <option value="staclara">Santa Clara</option>
-                            <option value="Holguín">Holguín</option>
+                            <option value="holguin">Holguín</option>
                             <option value="bayamo">Bayamo</option>
                         </select>
 
@@ -406,8 +406,68 @@
                         <div class="error3"></div>
 
                     </div>
+                    <!--The pet was found... -->
                     <div>
-                        <!--Any additional info to help improve the pet search -->
+                        <label for="petWasFound">Pet Was found (Check all that apply)</label>
+                        <i class="fas fa-paw"></i>
+
+                        <div class="selectBox" onclick="showCheckboxes()">
+                            <select class="form-select" id="petWasFound">
+                                <option value="none" selected disabled hidden>Pet was found...</option>
+                            </select>
+                            <div class="overSelect"></div>
+                        </div>
+
+                        <div class="form-check" id="checkBoxes">
+                            <label class="form-check-label" for="check1">
+                                <input type="checkbox" class="form-check-input" id="check1" name="option1"
+                                    value="wearing collar or harness">
+                                wearing collar or harness
+                            </label>
+                            <label class="form-check-label" for="check2">
+                                <input type="checkbox" class="form-check-input" id="check2" name="option2"
+                                    value="wearing ID tags">
+                                wearing ID tags
+                            </label>
+                            <label class="form-check-label" for="check3">
+                                <input type="checkbox" class="form-check-input" id="check3" name="option3"
+                                    value="with no collar">
+                                with no collar
+                            </label>
+                            <label class="form-check-label" for="check4">
+                                <input type="checkbox" class="form-check-input" id="check4" name="option4"
+                                    value="microchipped">
+                                microchipped
+                            </label>
+                            <label class="form-check-label" for="check5">
+                                <input type="checkbox" class="form-check-input" id="check5" name="option5"
+                                    value="not microchipped">
+                                not microchipped
+                            </label>
+                            <label class="form-check-label" for="check6">
+                                <input type="checkbox" class="form-check-input" id="check6" name="option6"
+                                    value="with no scan for microchip">
+                                with no scan for microchip
+                            </label>
+                            <label class="form-check-label" for="check7">
+                                <input type="checkbox" class="form-check-input" id="check7" name="option7"
+                                    value="with an ID tattoo">
+                                with an ID tattoo
+                            </label>
+                            <label class="form-check-label" for="check8">
+                                <input type="checkbox" class="form-check-input" id="check8" name="option8"
+                                    value="wearing a band on it's leg">
+                                wearing a band on it's leg
+                            </label>
+                        </div>
+
+                        <i class="fas fa-exclamation-circle failure-icon3"></i>
+                        <i class="far fa-check-circle success-icon3"></i>
+
+                        <div class="error3"></div>
+                    </div>
+                    <!--Any additional info to help improve the pet search -->
+                    <div>
                         <label for="comment">Any additional info to help improve the pet search</label>
                         <i class="fas fa-clipboard"></i>
                         <textarea class="form-control" rows="4" id="comment" name="text"></textarea>
@@ -417,7 +477,7 @@
 
                         <div class="error3"></div>
                     </div>
-                    <!--   Contact Name -->
+                    <!--Contact Name -->
                     <div>
                         <label for="contactName">Contact Name</label>
                         <i class="fas fa-address-book"></i>
@@ -430,7 +490,7 @@
                         <div class="error3"></div>
 
                     </div>
-                    <!--   Contact Phone -->
+                    <!--Contact Phone -->
                     <div>
                         <label for="contactPhone">Contact Phone</label>
                         <i class="fas fa-phone"></i>
@@ -443,7 +503,7 @@
                         <div class="error3"></div>
 
                     </div>
-                    <!--   Contact Email-->
+                    <!--Contact Email-->
                     <div>
                         <label for="contactEmail">Contact Email</label>
                         <i class="fas fa-envelope"></i>
@@ -455,41 +515,6 @@
 
                         <div class="error3"></div>
 
-                    </div>
-                    <!--The action that the pet was doing -->
-                    <label>Pet Was (Check all that apply)</label>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="check1" name="option1" value="something"
-                            checked>
-                        <label class="form-check-label" for="check1">Wearing collar or harness.</label>
-                    </div>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="check2" name="option2" value="something">
-                        <label class="form-check-label" for="check2">Wearing ID tags.</label>
-                    </div>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="check3" name="option2" value="something">
-                        <label class="form-check-label" for="check3">No collar.</label>
-                    </div>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="check4" name="option2" value="something">
-                        <label class="form-check-label" for="check4">Microchipped.</label>
-                    </div>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="check5" name="option2" value="something">
-                        <label class="form-check-label" for="check5">Not microchipped.</label>
-                    </div>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="check6" name="option2" value="something">
-                        <label class="form-check-label" for="check6">Has not yet been scanned for a microchip.</label>
-                    </div>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="check7" name="option2" value="something">
-                        <label class="form-check-label" for="check7">Has an ID tattoo.</label>
-                    </div>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="check8" name="option2" value="something">
-                        <label class="form-check-label" for="check8">Bird wearing a band on it's leg.</label>
                     </div>
                 </div>
 
@@ -504,9 +529,8 @@
         </div>
     </form>
 
-
+    <script src="./js/app.js"></script>
+    <script src="./js/validations.js"></script>
 </body>
-<script src="./js/app.js"></script>
-<script src="./js/validations.js"></script>
 
 </html>

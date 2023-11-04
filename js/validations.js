@@ -135,25 +135,25 @@ form3.addEventListener("submit", (e) => {
     //Prevent the form from submmiting event
     e.preventDefault();
 
-    //Targeting ValNotBlankandLength function to avoid empty inputs fields and constraint its length 
-    ValNotBlankandLength(petName, 2, 8, 0, petNameM);
-    ValNotBlankandLength(petType, 3, 8, 2, petTypeM);
-    ValNotBlankandLength(petBreed, 3, 8, 3, petBreedM);
-    ValNotBlankandLength(comment, 20, 125, 10, commentM);
-    ValNotBlankandLength(contactName, 3, 8, 11, contactNM);
+    //Targeting NotBlankandLengthValid function to avoid empty inputs fields and constraint its length 
+    NotBlankandLengthValid(petName, 2, 8, 0, petNameM);
+    NotBlankandLengthValid(petType, 3, 8, 2, petTypeM);
+    NotBlankandLengthValid(petBreed, 3, 8, 3, petBreedM);
+    NotBlankandLengthValid(comment, 20, 125, 11, commentM);
+    NotBlankandLengthValid(contactName, 3, 8, 12, contactNM);
 
     //Targeting the File Upload Missing Pet Picture Validation
     petPictureValid(petPicture, 1, petPictureM);
 
     //Validating the contact phone input field correct format
-    isPhoneValid(contactPhone, 7, 15, 12, contactPM);
+    isPhoneValid(contactPhone, 7, 15, 13, contactPM);
 
     //Validating the correct format of the email input field and that it is not empty
-    isEmailValid(contactEmail, 13, contactEM);
+    isEmailValid(contactEmail, 14, contactEM);
 });
 
 //Not Blank and desired input fields length validations
-const ValNotBlankandLength = (id, min, max, serial, messages) => {
+const NotBlankandLengthValid = (id, min, max, serial, messages) => {
     let valid = false;
 
     if (!notBlankValid(id)) {
@@ -218,7 +218,7 @@ const isPhoneValid = (id, min, max, serial, messages) => {
     return valid;
 }
 
-//3rd Modal Empty field validations
+//3rd Modal not empty field validations
 let notBlankValid = (id) => {
     //Checking if the user inputs is empty.
     if (id.value.trim() === "") {
@@ -295,4 +295,54 @@ const showSuccessM = (id, serial) => {
     failureIcon3[serial].style.opacity = "0";
     successIcon3[serial].style.opacity = "1"; //showing green success icon
 }
+//==================================================================================================
+let show = true;
 
+//Obtain all form-check-input classes for store his values and future processing
+let checkblist = (checkblist) => document.getElementsByClassName(checkblist);
+
+//Store all form-check-input classes inside a HTML (Live) Collection. It's not a good practice iterate over a Live Collection
+let formcheckinput = checkblist("form-check-input");
+
+//Array for future  checkbox items collections transfer 
+let checkbArr = [];
+
+//Add the HTML (Live) Collection stored in [formcheckinput] to an array
+checkbArr = [...formcheckinput]; //Using ...(spread operator) to transfer the items into the array
+/*
+console.info(formcheckinput.item(0).id);
+console.info(formcheckinput.item(0).value);
+*/
+
+//Get all form-check-input classes from the array
+const showCheckListVal = (checklist) => {
+    for (let i = 0; i < checklist.length; i++) {
+        /*
+        console.info(checklist[i].id);
+        console.info(checklist[i].value);
+        console.info(checklist[i].checked);
+        */
+        checklist[i].addEventListener("change", () => {
+            if (!checklist[i].checked) {
+                console.info( "Check box: "+ checklist[i].id +" isn't checked. ");
+            } else {
+                console.info( "Check box: "+ checklist[i].id +" is checked. ");
+            }
+        });
+    }
+}
+
+showCheckListVal(checkbArr);
+
+//Show and hide a list of checkboxes when clicking on a select input type with id = 'petWasFound' 
+function showCheckboxes() {
+    let checkboxes = document.getElementById("checkBoxes");
+
+    if (show) {
+        checkboxes.style.display = "block";
+        show = false;
+    } else {
+        checkboxes.style.display = "none";
+        show = true;
+    }
+}

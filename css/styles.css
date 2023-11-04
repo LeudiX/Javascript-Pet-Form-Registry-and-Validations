@@ -5,8 +5,10 @@ body::-webkit-scrollbar {
 
 /* Hide scrollbar for IE, Edge and Firefox */
 body {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
 /**
@@ -57,9 +59,32 @@ form div input,
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.form-control {
+  display: inline;
+  /*Fixed troubles related with bootstrap-5 form control and icons errors status position*/
+}
 
-.form-control{
-  display: inline; /*Fixed troubles related with bootstrap-5 form control and icons errors status*/
+.selectBox { 
+  position: relative; 
+} 
+
+.overSelect { 
+  position: absolute; 
+  left: 0; 
+  right: 0; 
+  top: 0; 
+  bottom: 0; 
+} 
+
+#checkBoxes {
+  /*Hiding the checkBoxes list inside the form-check class*/
+  display: none;
+  border: 2px solid #c4c4c4;
+  width: 95%;
+  border-radius: 8px;
+  outline: none;
+  padding: 0 35px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /**
