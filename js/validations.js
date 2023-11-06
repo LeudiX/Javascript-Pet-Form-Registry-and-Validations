@@ -259,38 +259,41 @@ const isPhoneValid = (id, min, max, serial, messages) => {
 //form-check-input class items Validation
 const checkListValid = (id, checklist, serial, message) => {
     let valid = false;
-    let noncheck = 0; //count nonchecked elements on the checkbox list
-    let checked = 0;  //count checked elements on the checkbox list 
-    let textnode = [];
-    const node = document.createElement("option");
-
+    let noncheck = 0;
+    let checked = 0;
+    let textnode = new Set(); //Creating a Set for collections of unique input checkbox values
+    let node = document.createElement("option");
+    
+    removeAllChildNodes(id); // Initial remove for all child nodes call from a node except the 1st
+   
     for (let i = 0; i < checklist.length; i++) {
 
         if (!checklist[i].checked) {
-            noncheck++;
+            noncheck++; //count nonchecked elements on the checkbox list
         } else
-            textnode.push(document.createTextNode(checklist[i].value));
-        checked++;
+            textnode.add(document.createTextNode(checklist[i].value+", "));
+            checked++; //count checked elements on the checkbox list 
     }
 
     if (noncheck == checklist.length) {
         showErrorM(id, serial, message[0]); //showErrorM
         id.value = id.firstElementChild.value; //change to default disabled value of select
+        removeAllChildNodes(id); // Remove all child nodes from a node except the 1st
+
         //console.info("There are " + noncheck + " checkboxs unchecked "); //Testing Outputs
     } else {
         showSuccessM(id, serial);
 
         textnode.forEach((e) => {
-            node.appendChild(e);
+            node.appendChild(e); //add new values to new node 
+            id.appendChild(node); //add new nodes to parent node
             id.value = node.value;
-        });
-
-        id.appendChild(node);
-
+           // id.value = node.value;
+        })
         //console.info("At least " + checked + " checkboxs are checked"); //Testing Outputs
         valid = true;
     }
-
+    
     /*Testing Outputs
     console.info(formcheckinput.item(0).id);
     console.info(formcheckinput.item(0).value);
@@ -318,6 +321,13 @@ const checkListValid = (id, checklist, serial, message) => {
     return valid;
 }
 //==================================================================================================
+
+// Remove all child nodes from his parent node except for the 1st
+function removeAllChildNodes(parent) {
+    while (parent.childElementCount > 1) {
+        parent.removeChild(parent.lastChild);
+    }
+}
 
 //3rd Modal not empty field validations
 let notBlankValid = (id) => {
