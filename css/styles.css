@@ -103,6 +103,14 @@ form div i {
 }
 
 /**
+*! Style rules for select input fields icons status
+**/
+.selects i.failure-icon3,
+.selects i.success-icon3{
+  margin-top: -40px;
+}
+
+/**
 * ! Style rules for error classes along with success and failure icons
 */
 .failure-icon,
