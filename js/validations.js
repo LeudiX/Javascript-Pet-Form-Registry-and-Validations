@@ -1,3 +1,13 @@
+/*
+   ____        _                    _ ___   __
+  |  _ \      | |                  | (_) \ / /
+  | |_) |_   _| |     ___ _   _  __| |_ \ V / 
+  |  _ <| | | | |    / _ \ | | |/ _` | | > <  
+  | |_) | |_| | |___|  __/ |_| | (_| | |/ . \ 
+  |____/ \__, |______\___|\__,_|\__,_|_/_/ \_\
+          __/ |                               
+         |___/                                
+ */
 /**
 * ! Handling validations with Js in the signInModal Form (1st Modal)
 */
@@ -105,6 +115,7 @@ let petName = id("petName"),
     petStatus = id("petStatus"),
     petAge = id("petAge"),
     petSize = id("petSize"),
+    dateLostFound = id("dateLostFound"),
     city = id("city"),
     petWasFound = id("petWasFound"),
     checkboxes = id("checkBoxes"),
@@ -128,6 +139,8 @@ const contactNM = ["Contact name field is required", "Contact name must be betwe
 const contactPM = ["Contact phone field is required", "Valid phone number must be between 7 and 15 digits", "Invalid phone number"];
 const contactEM = ["Contact email field is required", "Invalid email"];
 const petWasDM = ["You must select at least one of the elements in the checkbock list"];
+const petSelectNBM = ["Selection over one of the elements in the list is required"];
+const petDateVM = ["Date in wich Pet was Lost/Found is required", "Entered date must be a past/present date"];
 
 
 //Show and hide a list of checkboxes when clicking on the select input type with id = 'petWasFound' 
@@ -160,7 +173,6 @@ let checkbArr = [];
 //Add the HTML (Live) Collection stored in [formcheckinput] to an array
 checkbArr = [...formcheckinput]; //Using ...(spread operator) to transfer the items into the array
 
-
 /**
  * !Targeting Third Modal form and add the submit event listener
  */
@@ -176,31 +188,82 @@ form3.addEventListener("submit", (e) => {
     NotBlankandLengthValid(comment, 20, 125, 11, commentM);
     NotBlankandLengthValid(contactName, 3, 8, 12, contactNM);
 
-    //Targeting the File Upload Missing Pet Picture Validation
+    //Targeting the File Upload Missing Pet Picture Validation in a specific format
     petPictureValid(petPicture, 1, petPictureM);
+
+    //Validation of the PetGender required select
+    isSelectValid(petGender, 4, petSelectNBM);
+
+    //Validation of the PetStatus required select
+    isSelectValid(petStatus, 5, petSelectNBM);
+
+    //Validation of the estimated PetAge required select
+    isSelectValid(petAge, 6, petSelectNBM);
+
+    //Validation of the estimated PetSize required select
+    isSelectValid(petSize, 7, petSelectNBM);
+
+    //Validation of the City where Pet WasLost/Found required select
+    isSelectValid(city, 9, petSelectNBM);
 
     //Validating the contact phone input field correct format
     isPhoneValid(contactPhone, 7, 15, 13, contactPM);
 
-    //Validating the correct format of the email input field and that it is not empty
+    //Validating Date entried by user is in past/present time (boolean)
+    petDateValid(dateLostFound, 8, petDateVM);
+
+    //Validating the email input field correct format and not empty
     isEmailValid(contactEmail, 14, contactEM);
 
-    //Validating the multiple checkbox list inside the form
+    //Validating the multiple checkbox list selection inside the form
     checkListValid(petWasFound, checkbArr, 10, petWasDM);
 });
 
+/**
+* !==============MAIN VALIDATORS FUNCTIONS=================================================================
+*/
 //Not Blank and desired input fields length validations
 const NotBlankandLengthValid = (id, min, max, serial, messages) => {
     let valid = false;
 
     if (!notBlankValid(id)) {
-        showErrorM(id, serial, messages[0]);
+        showErrorM(id, serial, messages[0]); //showErrorM
     }
     else if (!isBetweenValid(id, min, max)) {
-        showErrorM(id, serial, messages[1]);
+        showErrorM(id, serial, messages[1]); //showErrorM
     }
     else {
-        showSuccessM(id, serial);
+        showSuccessM(id, serial);   //showSuccess
+        valid = true;
+    }
+    return valid;
+}
+
+//Selects NotEmpty Validation
+const isSelectValid = (id, serial, message) => {
+    let valid = false;
+
+    if (!notSelectBlankValid(id)) {
+        showErrorM(id, serial, message[0]); //showErrorM
+    } else {
+        showSuccessM(id, serial); //showSuccess
+        valid = true;
+    }
+    return valid;
+}
+
+//Pet Date Lost/Found Validation
+const petDateValid = (id, serial, message) => {
+    let valid = false;
+    const petFound = id.value;
+
+    if (!notBlankValid(id)) {
+        showErrorM(id, serial, message[0]); //showErrorM
+    }
+    else if (!pastOrPresentDate(petFound)) {
+        showErrorM(id, serial, message[1]); //showErrorM
+    } else {
+        showSuccessM(id, serial); //showSuccess
         valid = true;
     }
     return valid;
@@ -222,7 +285,7 @@ const isEmailValid = (id, serial, messages) => {
         showErrorM(id, serial, messages[1]); //showErrorM
     }
     else {
-        showSuccessM(id, serial); //showSuccessM
+        showSuccessM(id, serial); //showSuccess
         valid = true;
     }
     return valid;
@@ -249,12 +312,11 @@ const isPhoneValid = (id, min, max, serial, messages) => {
         showErrorM(id, serial, messages[2]); //showErrorM
     }
     else {
-        showSuccessM(id, serial); //showSuccessM
+        showSuccessM(id, serial); //showSuccess
         valid = true;
     }
     return valid;
 }
-
 
 //form-check-input class items Validation
 const checkListValid = (id, checklist, serial, message) => {
@@ -262,8 +324,8 @@ const checkListValid = (id, checklist, serial, message) => {
     let noncheck = 0;
     let checked = 0;
     let textnode = new Set(); //Creating a Set for collections of unique input checkbox values
-    const node = document.createElement("option");
-    const node2 = document.createElement("option");
+    const node = document.createElement("option");  //child node for future addition into select parent 
+    const node2 = document.createElement("option"); //child node for future addition into select parent 
 
     removeAllChildNodes(id); // Initial remove for all child nodes added to his parent node except the 1st
 
@@ -280,20 +342,19 @@ const checkListValid = (id, checklist, serial, message) => {
         showErrorM(id, serial, message[0]); //showErrorM
         id.value = id.firstElementChild.value; //change select value to his default disabled value         
     } else {
-        showSuccessM(id, serial); //showErrorM
-        
-            textnode.forEach((e) => { //loop over all checkbox elements
-                node.appendChild(e); //add new text values to new node1 
-                id.appendChild(node); //add 1st node "option" to parent node (with values)
-                id.value = node.value; //change value of the default parent select with 1st node value
-            })
-            if (textnode.size >= 3) { //if are more than 3 checkbox elements selected
-                const defnode = document.createTextNode("Selected " + textnode.size + " values"); //create a new texnode
-                node2.appendChild(defnode); //add new text value to new "option" node2
-                id.appendChild(node2); //add 2nd node "option" to parent node (with value) 
-                id.value = node2.value; //change value of the default parent select with the 2nd node value
-            }    
-    
+        showSuccessM(id, serial); //showSucces
+        textnode.forEach((e) => { //loop over all checkbox elements
+            node.appendChild(e); //add new text values to new node1 
+            id.appendChild(node); //add 1st node "option" to parent node (with values)
+            id.value = node.value; //change value of the default parent select with 1st node value
+        })
+        if (textnode.size >= 3) { //if are more than 3 checkbox elements selected
+            const defnode = document.createTextNode("Selected " + textnode.size + " values"); //create a new texnode
+            node2.appendChild(defnode); //add new text value to new "option" node2
+            id.appendChild(node2); //add 2nd node "option" to parent node (with value) 
+            id.value = node2.value; //change value of the default parent select with the 2nd node value
+        }
+
         //console.info("At least " + checked + " checkboxs are checked"); //Testing Outputs
         valid = true;
     }
@@ -307,7 +368,24 @@ const checkListValid = (id, checklist, serial, message) => {
     console.info("There are " + noncheck + " checkboxs unchecked ");*/
 
 }
-//==================================================================================================
+
+/**
+* !==============SUPPORT FUNCTIONS=================================================================
+*/
+//Checking date entried is in past/present time (boolean)
+function pastOrPresentDate(date) {
+    // Getting the current date
+    const today = new Date();
+
+    // Validating if the userDate is in the valid date format
+    const petLFD = new Date(date);
+
+    //console.info(today);//checking  today var status (Testing Outputs)
+    //console.info(petLFD);//checking  userD var status (Testing Outputs)
+    
+    //Using logic to check for invalid future date (boolean)
+    return (petLFD < today);
+}
 
 // Remove all child nodes from his parent node except for the 1st
 function removeAllChildNodes(parent) {
@@ -320,6 +398,17 @@ function removeAllChildNodes(parent) {
 let notBlankValid = (id) => {
     //Checking if the user inputs is empty.
     if (id.value.trim() === "") {
+        return false;
+    }
+    else {
+        return true;
+    }
+}
+
+//Validations of empty fields for select class
+let notSelectBlankValid = (id) => {
+    //Checking if the user inputs is empty.
+    if (id.value.trim() === "none") {
         return false;
     }
     else {
@@ -351,7 +440,7 @@ function petPictureValid(id, serial, message) {
                     'imagePreview').src =
                     e.target.result; //Changing the attribute (src) value of the specified element obtained by id
             };
-            showSuccessM(id, serial); //showSuccessM
+            showSuccessM(id, serial); //showSuccess
             reader.readAsDataURL(fileInput.files[0]);
         }
     }
