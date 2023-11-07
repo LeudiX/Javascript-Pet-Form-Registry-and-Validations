@@ -262,7 +262,8 @@ const checkListValid = (id, checklist, serial, message) => {
     let noncheck = 0;
     let checked = 0;
     let textnode = new Set(); //Creating a Set for collections of unique input checkbox values
-    let node = document.createElement("option");
+    const node = document.createElement("option");
+    const node2 = document.createElement("option");
 
     removeAllChildNodes(id); // Initial remove for all child nodes added to his parent node except the 1st
 
@@ -274,40 +275,37 @@ const checkListValid = (id, checklist, serial, message) => {
             textnode.add(document.createTextNode(checklist[i].value + ", "));
         checked++; //count checked elements on the checkbox list            
     }
+
     if (noncheck == checklist.length) { //if all checkbox elements are uncheck
         showErrorM(id, serial, message[0]); //showErrorM
         id.value = id.firstElementChild.value; //change select value to his default disabled value         
-
-        //console.info("There are " + noncheck + " checkboxs unchecked "); //Testing Outputs
     } else {
         showSuccessM(id, serial); //showErrorM
-
-        if (textnode.size >= 3) { //if are more than 3 checkbox elements selected
-            const defnode = document.createTextNode("Selected " + textnode.size + " values"); //create a new texnode
-            node.appendChild(defnode); //add new text value to default "option" node
-            id.appendChild(node); //add new "option" type node to select 
-            id.value = node.value; //change value of the select for the new one
-        }
-        else {
+        
             textnode.forEach((e) => { //loop over all checkbox elements
-                node.appendChild(e); //add new text values to new node 
-                id.appendChild(node); //add new nodes to parent node
-                id.value = node.value; //change value of the select for the new ones
+                node.appendChild(e); //add new text values to new node1 
+                id.appendChild(node); //add 1st node "option" to parent node (with values)
+                id.value = node.value; //change value of the default parent select with 1st node value
             })
-
-        }
+            if (textnode.size >= 3) { //if are more than 3 checkbox elements selected
+                const defnode = document.createTextNode("Selected " + textnode.size + " values"); //create a new texnode
+                node2.appendChild(defnode); //add new text value to new "option" node2
+                id.appendChild(node2); //add 2nd node "option" to parent node (with value) 
+                id.value = node2.value; //change value of the default parent select with the 2nd node value
+            }    
+    
         //console.info("At least " + checked + " checkboxs are checked"); //Testing Outputs
         valid = true;
     }
-
+    return valid;
     /*Testing Outputs
     console.info(formcheckinput.item(0).id);
     console.info(formcheckinput.item(0).value);
     console.info(checklist[i].id);
     console.info(checklist[i].value);
-    console.info(checklist[i].checked);*/
+    console.info(checklist[i].checked);
+    console.info("There are " + noncheck + " checkboxs unchecked ");*/
 
-    return valid;
 }
 //==================================================================================================
 
