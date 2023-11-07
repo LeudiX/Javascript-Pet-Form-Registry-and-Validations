@@ -263,61 +263,50 @@ const checkListValid = (id, checklist, serial, message) => {
     let checked = 0;
     let textnode = new Set(); //Creating a Set for collections of unique input checkbox values
     let node = document.createElement("option");
-    
-    removeAllChildNodes(id); // Initial remove for all child nodes call from a node except the 1st
-   
-    for (let i = 0; i < checklist.length; i++) {
+
+    removeAllChildNodes(id); // Initial remove for all child nodes added to his parent node except the 1st
+
+    for (let i = 0; i < checklist.length; i++) { //loop over the checkbox list
 
         if (!checklist[i].checked) {
             noncheck++; //count nonchecked elements on the checkbox list
         } else
-            textnode.add(document.createTextNode(checklist[i].value+", "));
-            checked++; //count checked elements on the checkbox list 
+            textnode.add(document.createTextNode(checklist[i].value + ", "));
+        checked++; //count checked elements on the checkbox list            
     }
-
-    if (noncheck == checklist.length) {
+    if (noncheck == checklist.length) { //if all checkbox elements are uncheck
         showErrorM(id, serial, message[0]); //showErrorM
-        id.value = id.firstElementChild.value; //change to default disabled value of select
-        removeAllChildNodes(id); // Remove all child nodes from a node except the 1st
+        id.value = id.firstElementChild.value; //change select value to his default disabled value         
 
         //console.info("There are " + noncheck + " checkboxs unchecked "); //Testing Outputs
     } else {
-        showSuccessM(id, serial);
+        showSuccessM(id, serial); //showErrorM
 
-        textnode.forEach((e) => {
-            node.appendChild(e); //add new values to new node 
-            id.appendChild(node); //add new nodes to parent node
-            id.value = node.value;
-           // id.value = node.value;
-        })
+        if (textnode.size >= 3) { //if are more than 3 checkbox elements selected
+            const defnode = document.createTextNode("Selected " + textnode.size + " values"); //create a new texnode
+            node.appendChild(defnode); //add new text value to default "option" node
+            id.appendChild(node); //add new "option" type node to select 
+            id.value = node.value; //change value of the select for the new one
+        }
+        else {
+            textnode.forEach((e) => { //loop over all checkbox elements
+                node.appendChild(e); //add new text values to new node 
+                id.appendChild(node); //add new nodes to parent node
+                id.value = node.value; //change value of the select for the new ones
+            })
+
+        }
         //console.info("At least " + checked + " checkboxs are checked"); //Testing Outputs
         valid = true;
     }
-    
+
     /*Testing Outputs
     console.info(formcheckinput.item(0).id);
     console.info(formcheckinput.item(0).value);
-
     console.info(checklist[i].id);
     console.info(checklist[i].value);
-    console.info(checklist[i].checked);     
-    
-    checklist[i].addEventListener("change", () => {
-        if (!checklist[i].checked) {
-            showErrorM(id, serial, message[0]); //showErrorM
-            console.info("Checkbox: " + checklist[i].id + " isn't checked. ");
-        } else {
-            showSuccessM(id, serial);  //showSuccessM
-            console.info("Checkbox: " + checklist[i].id + " is checked. Adding to checklist!!");
-            chequed.push(checklist[i].value);
-            check++;
-            console.info("At least " + check + " elements are chequed");
-            valid = true;
-        }
-        for (let i = 0; i < chequed.length; i++) { //Loop
-            console.info(chequed[i]);
-        }
-    });*/
+    console.info(checklist[i].checked);*/
+
     return valid;
 }
 //==================================================================================================
